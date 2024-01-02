@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Web Modeler" exporterVersion="6c0f1c1" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.2.0" camunda:diagramRelationId="a6a57c4e-d9ac-4d59-9c42-55fd2108f3ec">
+  <bpmn:process id="Process_ptruqp4" isExecutable="true">
+    <bpmn:sequenceFlow id="Flow_1h8dszm" sourceRef="StartEvent_1" targetRef="Gateway_050z2fn" />
+    <bpmn:startEvent id="StartEvent_1" name="list of infringements received">
+      <bpmn:extensionElements>
+        <zeebe:ioMapping>
+          <zeebe:output source="=[&#34;item-1&#34;, &#34;item-2&#34;]" target="infrList" />
+        </zeebe:ioMapping>
+        <zeebe:properties>
+          <zeebe:property name="camundaModeler:exampleOutputJson" value="[&#34;item-1&#34;, &#34;item-2&#34;]" />
+        </zeebe:properties>
+      </bpmn:extensionElements>
+      <bpmn:outgoing>Flow_1h8dszm</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:userTask id="Activity_039el56" name="Issue infringement notices">
+      <bpmn:incoming>Flow_0aovxyh</bpmn:incoming>
+      <bpmn:outgoing>Flow_0z0doc6</bpmn:outgoing>
+      <bpmn:multiInstanceLoopCharacteristics>
+        <bpmn:extensionElements>
+          <zeebe:loopCharacteristics inputCollection="=infrList" inputElement="infrItem" />
+        </bpmn:extensionElements>
+        <bpmn:completionCondition xsi:type="bpmn:tFormalExpression">=numberOfCompletedInstances = 1</bpmn:completionCondition>
+      </bpmn:multiInstanceLoopCharacteristics>
+    </bpmn:userTask>
+    <bpmn:userTask id="Activity_08q9003" name="Manage other transport issues">
+      <bpmn:incoming>Flow_1fhgq97</bpmn:incoming>
+      <bpmn:outgoing>Flow_1u4kpnz</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_0aovxyh" sourceRef="Gateway_050z2fn" targetRef="Activity_039el56" />
+    <bpmn:parallelGateway id="Gateway_050z2fn">
+      <bpmn:incoming>Flow_1h8dszm</bpmn:incoming>
+      <bpmn:outgoing>Flow_0aovxyh</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1fhgq97</bpmn:outgoing>
+    </bpmn:parallelGateway>
+    <bpmn:sequenceFlow id="Flow_1fhgq97" sourceRef="Gateway_050z2fn" targetRef="Activity_08q9003" />
+    <bpmn:endEvent id="Event_1ggvuap">
+      <bpmn:incoming>Flow_0z0doc6</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0z0doc6" sourceRef="Activity_039el56" targetRef="Event_1ggvuap" />
+    <bpmn:endEvent id="Event_0hfl98w">
+      <bpmn:incoming>Flow_1u4kpnz</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1u4kpnz" sourceRef="Activity_08q9003" targetRef="Event_0hfl98w" />
+  </bpmn:process>
+  <bpmn:message id="Message_29p4g0h" name="Message_29p4g0h" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_ptruqp4">
+      <bpmndi:BPMNShape id="Event_1ji8209_di" bpmnElement="StartEvent_1">
+        <dc:Bounds x="150" y="172" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="135" y="215" width="67" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1toiyaa_di" bpmnElement="Activity_039el56">
+        <dc:Bounds x="370" y="80" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0e0eykk_di" bpmnElement="Gateway_050z2fn">
+        <dc:Bounds x="245" y="165" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1ggvuap_di" bpmnElement="Event_1ggvuap">
+        <dc:Bounds x="552" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0boxekm_di" bpmnElement="Activity_08q9003">
+        <dc:Bounds x="370" y="210" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0hfl98w_di" bpmnElement="Event_0hfl98w">
+        <dc:Bounds x="552" y="232" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1h8dszm_di" bpmnElement="Flow_1h8dszm">
+        <di:waypoint x="186" y="190" />
+        <di:waypoint x="245" y="190" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0aovxyh_di" bpmnElement="Flow_0aovxyh">
+        <di:waypoint x="270" y="165" />
+        <di:waypoint x="270" y="120" />
+        <di:waypoint x="370" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1fhgq97_di" bpmnElement="Flow_1fhgq97">
+        <di:waypoint x="270" y="215" />
+        <di:waypoint x="270" y="250" />
+        <di:waypoint x="370" y="250" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0z0doc6_di" bpmnElement="Flow_0z0doc6">
+        <di:waypoint x="470" y="120" />
+        <di:waypoint x="552" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1u4kpnz_di" bpmnElement="Flow_1u4kpnz">
+        <di:waypoint x="470" y="250" />
+        <di:waypoint x="552" y="250" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

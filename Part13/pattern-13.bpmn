@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Web Modeler" exporterVersion="2b12eab" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.3.0" camunda:diagramRelationId="1aae4e2c-9b4e-4398-81b5-69f47fc2b3e0">
+  <bpmn:process id="Process_0jklj74" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1" name="annual report due">
+      <bpmn:outgoing>Flow_1abrg34</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:task id="Activity_0y4y87d" name="Create annual report">
+      <bpmn:incoming>Flow_1abrg34</bpmn:incoming>
+      <bpmn:outgoing>Flow_0rmer6g</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="Flow_1abrg34" sourceRef="StartEvent_1" targetRef="Activity_0y4y87d" />
+    <bpmn:task id="Activity_0bmdmko" name="Sign annual report">
+      <bpmn:incoming>Flow_0rmer6g</bpmn:incoming>
+      <bpmn:outgoing>Flow_16ac29f</bpmn:outgoing>
+      <bpmn:multiInstanceLoopCharacteristics />
+    </bpmn:task>
+    <bpmn:sequenceFlow id="Flow_0rmer6g" sourceRef="Activity_0y4y87d" targetRef="Activity_0bmdmko" />
+    <bpmn:task id="Activity_1s580db" name="Issue annual report">
+      <bpmn:incoming>Flow_16ac29f</bpmn:incoming>
+      <bpmn:outgoing>Flow_1wg53wk</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="Flow_16ac29f" sourceRef="Activity_0bmdmko" targetRef="Activity_1s580db" />
+    <bpmn:endEvent id="Event_0nbytlu" name="annual report issued">
+      <bpmn:incoming>Flow_1wg53wk</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1wg53wk" sourceRef="Activity_1s580db" targetRef="Event_0nbytlu" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_0jklj74">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="150" y="82" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="125" y="125" width="87" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0y4y87d_di" bpmnElement="Activity_0y4y87d">
+        <dc:Bounds x="240" y="60" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0bmdmko_di" bpmnElement="Activity_0bmdmko">
+        <dc:Bounds x="400" y="60" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1s580db_di" bpmnElement="Activity_1s580db">
+        <dc:Bounds x="560" y="60" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0nbytlu_di" bpmnElement="Event_0nbytlu">
+        <dc:Bounds x="722" y="82" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="707" y="125" width="66" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1abrg34_di" bpmnElement="Flow_1abrg34">
+        <di:waypoint x="186" y="100" />
+        <di:waypoint x="240" y="100" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0rmer6g_di" bpmnElement="Flow_0rmer6g">
+        <di:waypoint x="340" y="100" />
+        <di:waypoint x="400" y="100" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_16ac29f_di" bpmnElement="Flow_16ac29f">
+        <di:waypoint x="500" y="100" />
+        <di:waypoint x="560" y="100" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1wg53wk_di" bpmnElement="Flow_1wg53wk">
+        <di:waypoint x="660" y="100" />
+        <di:waypoint x="722" y="100" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

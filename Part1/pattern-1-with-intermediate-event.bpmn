@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Web Modeler" exporterVersion="1b04471" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.2.0" camunda:diagramRelationId="ecef41cb-0833-4a79-9833-fd3739373204">
+  <bpmn:process id="Process_uifqeuf" isExecutable="true">
+    <bpmn:task id="Activity_0qm4x7r" name="Issue train ticket">
+      <bpmn:incoming>Flow_1rc9u99</bpmn:incoming>
+      <bpmn:outgoing>Flow_06nlcsu</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Activity_0qio26w" name="Print receipt">
+      <bpmn:incoming>Flow_0vbyowo</bpmn:incoming>
+      <bpmn:outgoing>Flow_0hok7mj</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="Flow_06nlcsu" sourceRef="Activity_0qm4x7r" targetRef="Event_1t7t85v" />
+    <bpmn:startEvent id="Event_01pcyno">
+      <bpmn:outgoing>Flow_1rc9u99</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_1rc9u99" sourceRef="Event_01pcyno" targetRef="Activity_0qm4x7r" />
+    <bpmn:intermediateThrowEvent id="Event_1t7t85v" name="ticket issued">
+      <bpmn:incoming>Flow_06nlcsu</bpmn:incoming>
+      <bpmn:outgoing>Flow_0vbyowo</bpmn:outgoing>
+    </bpmn:intermediateThrowEvent>
+    <bpmn:sequenceFlow id="Flow_0vbyowo" sourceRef="Event_1t7t85v" targetRef="Activity_0qio26w" />
+    <bpmn:endEvent id="Event_0njltac">
+      <bpmn:incoming>Flow_0hok7mj</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0hok7mj" sourceRef="Activity_0qio26w" targetRef="Event_0njltac" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_uifqeuf">
+      <bpmndi:BPMNShape id="Activity_0qm4x7r_di" bpmnElement="Activity_0qm4x7r">
+        <dc:Bounds x="240" y="78" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_01pcyno_di" bpmnElement="Event_01pcyno">
+        <dc:Bounds x="152" y="100" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0qio26w_di" bpmnElement="Activity_0qio26w">
+        <dc:Bounds x="520" y="78" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1t7t85v_di" bpmnElement="Event_1t7t85v">
+        <dc:Bounds x="412" y="100" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="400" y="143" width="61" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0njltac_di" bpmnElement="Event_0njltac">
+        <dc:Bounds x="692" y="100" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_06nlcsu_di" bpmnElement="Flow_06nlcsu">
+        <di:waypoint x="340" y="118" />
+        <di:waypoint x="412" y="118" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1rc9u99_di" bpmnElement="Flow_1rc9u99">
+        <di:waypoint x="188" y="118" />
+        <di:waypoint x="240" y="118" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0vbyowo_di" bpmnElement="Flow_0vbyowo">
+        <di:waypoint x="448" y="118" />
+        <di:waypoint x="520" y="118" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0hok7mj_di" bpmnElement="Flow_0hok7mj">
+        <di:waypoint x="620" y="118" />
+        <di:waypoint x="692" y="118" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

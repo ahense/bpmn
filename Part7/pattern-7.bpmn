@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:mida="http://mida.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Web Modeler" exporterVersion="1b04471" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.2.0" camunda:diagramRelationId="ea6ef4f2-c4cd-4209-aee5-9ac943c7f14a">
+  <bpmn:process id="Process_gd9iwip" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_1va7l27</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:task id="Activity_18it559" name="Answer emergency call">
+      <bpmn:extensionElements>
+        <mida:taskType>
+          <mida:type>a</mida:type>
+        </mida:taskType>
+        <mida:guard>
+          <mida:exp>true</mida:exp>
+        </mida:guard>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1va7l27</bpmn:incoming>
+      <bpmn:outgoing>Flow_11vsm1n</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="Flow_1va7l27" sourceRef="StartEvent_1" targetRef="Activity_18it559" />
+    <bpmn:task id="Activity_0f6celk" name="Despatch police">
+      <bpmn:extensionElements>
+        <mida:taskType>
+          <mida:type>a</mida:type>
+        </mida:taskType>
+        <mida:guard>
+          <mida:exp>true</mida:exp>
+        </mida:guard>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1xgss5p</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1jwa3jm</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Activity_1bajbzx" name="Despatch ambulance">
+      <bpmn:extensionElements>
+        <mida:taskType>
+          <mida:type>a</mida:type>
+        </mida:taskType>
+        <mida:guard>
+          <mida:exp>true</mida:exp>
+        </mida:guard>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0oawraj</bpmn:incoming>
+      <bpmn:outgoing>Flow_0vy5hir</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="Flow_11vsm1n" sourceRef="Activity_18it559" targetRef="Gateway_1waj1jz" />
+    <bpmn:inclusiveGateway id="Gateway_1waj1jz" name="need what?">
+      <bpmn:incoming>Flow_11vsm1n</bpmn:incoming>
+      <bpmn:outgoing>Flow_1xgss5p</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0oawraj</bpmn:outgoing>
+    </bpmn:inclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_1xgss5p" name="police" sourceRef="Gateway_1waj1jz" targetRef="Activity_0f6celk">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">true</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_0oawraj" name="ambulance" sourceRef="Gateway_1waj1jz" targetRef="Activity_1bajbzx">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">true</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:inclusiveGateway id="Gateway_03tamd4">
+      <bpmn:incoming>Flow_0vy5hir</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_1jwa3jm</bpmn:incoming>
+      <bpmn:outgoing>Flow_0oe3577</bpmn:outgoing>
+    </bpmn:inclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_0vy5hir" sourceRef="Activity_1bajbzx" targetRef="Gateway_03tamd4" />
+    <bpmn:task id="Activity_1gbecrp" name="Transfer patient">
+      <bpmn:extensionElements>
+        <mida:taskType>
+          <mida:type>a</mida:type>
+        </mida:taskType>
+        <mida:guard>
+          <mida:exp>true</mida:exp>
+        </mida:guard>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0oe3577</bpmn:incoming>
+      <bpmn:outgoing>Flow_101nyqx</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="Flow_0oe3577" sourceRef="Gateway_03tamd4" targetRef="Activity_1gbecrp" />
+    <bpmn:intermediateThrowEvent id="Event_02hgb6i">
+      <bpmn:incoming>Flow_101nyqx</bpmn:incoming>
+    </bpmn:intermediateThrowEvent>
+    <bpmn:sequenceFlow id="Flow_101nyqx" sourceRef="Activity_1gbecrp" targetRef="Event_02hgb6i" />
+    <bpmn:sequenceFlow id="SequenceFlow_1jwa3jm" sourceRef="Activity_0f6celk" targetRef="Gateway_03tamd4" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_gd9iwip">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="150" y="232" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_18it559_di" bpmnElement="Activity_18it559">
+        <dc:Bounds x="240" y="210" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0f6celk_di" bpmnElement="Activity_0f6celk">
+        <dc:Bounds x="610" y="80" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1bajbzx_di" bpmnElement="Activity_1bajbzx">
+        <dc:Bounds x="610" y="340" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0hre688_di" bpmnElement="Gateway_1waj1jz" bioc:stroke="#000" bioc:fill="#fff">
+        <dc:Bounds x="415" y="225" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="381" y="282" width="57" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1crshnn_di" bpmnElement="Gateway_03tamd4">
+        <dc:Bounds x="795" y="225" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1gbecrp_di" bpmnElement="Activity_1gbecrp">
+        <dc:Bounds x="920" y="210" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_02hgb6i_di" bpmnElement="Event_02hgb6i">
+        <dc:Bounds x="1102" y="232" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1va7l27_di" bpmnElement="Flow_1va7l27">
+        <di:waypoint x="186" y="250" />
+        <di:waypoint x="240" y="250" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_11vsm1n_di" bpmnElement="Flow_11vsm1n">
+        <di:waypoint x="340" y="250" />
+        <di:waypoint x="415" y="250" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1xgss5p_di" bpmnElement="Flow_1xgss5p" bioc:stroke="#000" bioc:fill="#fff">
+        <di:waypoint x="440" y="225" />
+        <di:waypoint x="440" y="120" />
+        <di:waypoint x="610" y="120" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="525" y="93" width="29" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0oawraj_di" bpmnElement="Flow_0oawraj" bioc:stroke="#000" bioc:fill="#fff">
+        <di:waypoint x="440" y="275" />
+        <di:waypoint x="440" y="380" />
+        <di:waypoint x="610" y="380" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="513" y="353" width="54" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0vy5hir_di" bpmnElement="Flow_0vy5hir">
+        <di:waypoint x="710" y="380" />
+        <di:waypoint x="820" y="380" />
+        <di:waypoint x="820" y="275" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0oe3577_di" bpmnElement="Flow_0oe3577">
+        <di:waypoint x="845" y="250" />
+        <di:waypoint x="920" y="250" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_101nyqx_di" bpmnElement="Flow_101nyqx">
+        <di:waypoint x="1020" y="250" />
+        <di:waypoint x="1102" y="250" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1jwa3jm_di" bpmnElement="SequenceFlow_1jwa3jm">
+        <di:waypoint x="710" y="120" />
+        <di:waypoint x="820" y="120" />
+        <di:waypoint x="820" y="225" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

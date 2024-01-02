@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:mida="http://mida.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Web Modeler" exporterVersion="1b04471" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.2.0" camunda:diagramRelationId="ea6ef4f2-c4cd-4209-aee5-9ac943c7f14a">
+  <bpmn:process id="Process_06uss13" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_1va7l27</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:task id="Activity_18it559" name="Answer emergency call">
+      <bpmn:extensionElements>
+        <mida:taskType>
+          <mida:type>a</mida:type>
+        </mida:taskType>
+        <mida:guard>
+          <mida:exp>true</mida:exp>
+        </mida:guard>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1va7l27</bpmn:incoming>
+      <bpmn:outgoing>Flow_11vsm1n</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="Flow_1va7l27" sourceRef="StartEvent_1" targetRef="Activity_18it559" />
+    <bpmn:task id="Activity_0f6celk" name="Despatch police">
+      <bpmn:extensionElements>
+        <mida:taskType>
+          <mida:type>a</mida:type>
+        </mida:taskType>
+        <mida:guard>
+          <mida:exp>true</mida:exp>
+        </mida:guard>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1xgss5p</bpmn:incoming>
+      <bpmn:outgoing>Flow_1pizuyl</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Activity_0sr75st" name="Despatch fire engine">
+      <bpmn:extensionElements>
+        <mida:taskType>
+          <mida:type>a</mida:type>
+        </mida:taskType>
+        <mida:guard>
+          <mida:exp>true</mida:exp>
+        </mida:guard>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0a2qe0b</bpmn:incoming>
+      <bpmn:outgoing>Flow_0ms3sid</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Activity_1bajbzx" name="Despatch ambulance">
+      <bpmn:extensionElements>
+        <mida:taskType>
+          <mida:type>a</mida:type>
+        </mida:taskType>
+        <mida:guard>
+          <mida:exp>true</mida:exp>
+        </mida:guard>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0oawraj</bpmn:incoming>
+      <bpmn:outgoing>Flow_0aimr29</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:intermediateThrowEvent id="Event_0dejwyg">
+      <bpmn:incoming>Flow_1pizuyl</bpmn:incoming>
+    </bpmn:intermediateThrowEvent>
+    <bpmn:sequenceFlow id="Flow_1pizuyl" sourceRef="Activity_0f6celk" targetRef="Event_0dejwyg" />
+    <bpmn:intermediateThrowEvent id="Event_17ho2sh">
+      <bpmn:incoming>Flow_0ms3sid</bpmn:incoming>
+    </bpmn:intermediateThrowEvent>
+    <bpmn:sequenceFlow id="Flow_0ms3sid" sourceRef="Activity_0sr75st" targetRef="Event_17ho2sh" />
+    <bpmn:intermediateThrowEvent id="Event_1owfhk2">
+      <bpmn:incoming>Flow_0aimr29</bpmn:incoming>
+    </bpmn:intermediateThrowEvent>
+    <bpmn:sequenceFlow id="Flow_0aimr29" sourceRef="Activity_1bajbzx" targetRef="Event_1owfhk2" />
+    <bpmn:sequenceFlow id="Flow_11vsm1n" sourceRef="Activity_18it559" targetRef="Gateway_1waj1jz" />
+    <bpmn:inclusiveGateway id="Gateway_1waj1jz" name="need what?">
+      <bpmn:incoming>Flow_11vsm1n</bpmn:incoming>
+      <bpmn:outgoing>Flow_1xgss5p</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0a2qe0b</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0oawraj</bpmn:outgoing>
+    </bpmn:inclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_1xgss5p" name="police" sourceRef="Gateway_1waj1jz" targetRef="Activity_0f6celk">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">true</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_0a2qe0b" name="fire engine" sourceRef="Gateway_1waj1jz" targetRef="Activity_0sr75st">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">false</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_0oawraj" name="ambulance" sourceRef="Gateway_1waj1jz" targetRef="Activity_1bajbzx">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">true</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_06uss13">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="150" y="232" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_18it559_di" bpmnElement="Activity_18it559">
+        <dc:Bounds x="240" y="210" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0sr75st_di" bpmnElement="Activity_0sr75st">
+        <dc:Bounds x="610" y="210" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1bajbzx_di" bpmnElement="Activity_1bajbzx">
+        <dc:Bounds x="610" y="340" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0f6celk_di" bpmnElement="Activity_0f6celk">
+        <dc:Bounds x="610" y="80" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0dejwyg_di" bpmnElement="Event_0dejwyg">
+        <dc:Bounds x="862" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_17ho2sh_di" bpmnElement="Event_17ho2sh">
+        <dc:Bounds x="862" y="232" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1owfhk2_di" bpmnElement="Event_1owfhk2">
+        <dc:Bounds x="862" y="362" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0hre688_di" bpmnElement="Gateway_1waj1jz" bioc:stroke="#000" bioc:fill="#fff">
+        <dc:Bounds x="415" y="225" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="381" y="282" width="57" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1va7l27_di" bpmnElement="Flow_1va7l27">
+        <di:waypoint x="186" y="250" />
+        <di:waypoint x="240" y="250" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1pizuyl_di" bpmnElement="Flow_1pizuyl">
+        <di:waypoint x="710" y="120" />
+        <di:waypoint x="862" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0ms3sid_di" bpmnElement="Flow_0ms3sid">
+        <di:waypoint x="710" y="250" />
+        <di:waypoint x="862" y="250" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0aimr29_di" bpmnElement="Flow_0aimr29">
+        <di:waypoint x="710" y="380" />
+        <di:waypoint x="862" y="380" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_11vsm1n_di" bpmnElement="Flow_11vsm1n">
+        <di:waypoint x="340" y="250" />
+        <di:waypoint x="415" y="250" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1xgss5p_di" bpmnElement="Flow_1xgss5p" bioc:stroke="#000" bioc:fill="#fff">
+        <di:waypoint x="440" y="225" />
+        <di:waypoint x="440" y="120" />
+        <di:waypoint x="610" y="120" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="525" y="93" width="29" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0a2qe0b_di" bpmnElement="Flow_0a2qe0b" bioc:stroke="#000" bioc:fill="#fff">
+        <di:waypoint x="465" y="250" />
+        <di:waypoint x="610" y="250" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="512" y="232" width="51" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0oawraj_di" bpmnElement="Flow_0oawraj" bioc:stroke="#000" bioc:fill="#fff">
+        <di:waypoint x="440" y="275" />
+        <di:waypoint x="440" y="380" />
+        <di:waypoint x="610" y="380" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="513" y="353" width="54" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

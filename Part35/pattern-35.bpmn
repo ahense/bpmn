@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Web Modeler" exporterVersion="7821bea" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.2.0" camunda:diagramRelationId="79bd972f-0766-403e-94d2-aab493d6fbd8">
+  <bpmn:process id="Process_1uy2rve" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_1gmwvrt</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_1gmwvrt" sourceRef="StartEvent_1" targetRef="Activity_02qfbom" />
+    <bpmn:sequenceFlow id="Flow_02bxb5b" sourceRef="Activity_1ui5iri" targetRef="Activity_1u3n7x8" />
+    <bpmn:endEvent id="Event_137lsvn">
+      <bpmn:incoming>Flow_17us9mi</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_17us9mi" sourceRef="Activity_1u3n7x8" targetRef="Event_137lsvn" />
+    <bpmn:sequenceFlow id="Flow_113c5dq" sourceRef="Activity_02qfbom" targetRef="Activity_1ui5iri" />
+    <bpmn:scriptTask id="Activity_02qfbom" name="Create instances">
+      <bpmn:extensionElements>
+        <zeebe:script expression="=0" resultVariable="x" />
+        <zeebe:ioMapping>
+          <zeebe:output source="=[1,2,3,4,5]" target="instances" />
+        </zeebe:ioMapping>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1gmwvrt</bpmn:incoming>
+      <bpmn:outgoing>Flow_113c5dq</bpmn:outgoing>
+    </bpmn:scriptTask>
+    <bpmn:userTask id="Activity_1u3n7x8" name="Write report">
+      <bpmn:incoming>Flow_02bxb5b</bpmn:incoming>
+      <bpmn:outgoing>Flow_17us9mi</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="Activity_1ui5iri" name="Run protein test">
+      <bpmn:incoming>Flow_113c5dq</bpmn:incoming>
+      <bpmn:outgoing>Flow_02bxb5b</bpmn:outgoing>
+      <bpmn:multiInstanceLoopCharacteristics>
+        <bpmn:extensionElements>
+          <zeebe:loopCharacteristics inputCollection="=instances" />
+        </bpmn:extensionElements>
+        <bpmn:completionCondition xsi:type="bpmn:tFormalExpression">=numberOfCompletedInstances  = 4</bpmn:completionCondition>
+      </bpmn:multiInstanceLoopCharacteristics>
+    </bpmn:userTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1uy2rve">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="150" y="82" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_137lsvn_di" bpmnElement="Event_137lsvn">
+        <dc:Bounds x="682" y="82" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0s8bkbj_di" bpmnElement="Activity_02qfbom">
+        <dc:Bounds x="230" y="60" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1ou9xf2_di" bpmnElement="Activity_1u3n7x8">
+        <dc:Bounds x="530" y="60" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_08sjl04_di" bpmnElement="Activity_1ui5iri">
+        <dc:Bounds x="380" y="60" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1gmwvrt_di" bpmnElement="Flow_1gmwvrt">
+        <di:waypoint x="186" y="100" />
+        <di:waypoint x="230" y="100" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_02bxb5b_di" bpmnElement="Flow_02bxb5b">
+        <di:waypoint x="480" y="100" />
+        <di:waypoint x="530" y="100" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_17us9mi_di" bpmnElement="Flow_17us9mi">
+        <di:waypoint x="630" y="100" />
+        <di:waypoint x="682" y="100" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_113c5dq_di" bpmnElement="Flow_113c5dq">
+        <di:waypoint x="330" y="100" />
+        <di:waypoint x="380" y="100" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
